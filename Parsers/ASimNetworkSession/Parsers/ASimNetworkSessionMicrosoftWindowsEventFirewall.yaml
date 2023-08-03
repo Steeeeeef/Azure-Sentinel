@@ -67,7 +67,7 @@ ParserQuery: |
   ///////////////////////////////////////////////////////
   // this query extract data fields from EventData column from SecurityEvent table
   ///////////////////////////////////////////////////////
-  let WindowsFirewall_SecurityEvent=(){ // Event IDs between (5151 .. 5159)
+  let WindowsFirewall_SecurityEvent=(disabled:bool=false){ // Event IDs between (5151 .. 5159)
   // will be extracting Event specific fields from 'EventData' field
     let SecurityEventProjected =
         SecurityEvent
@@ -137,7 +137,7 @@ ParserQuery: |
   //////////////////////////////////////////////////////
   // this query extract the data from WindowsEvent table
   //////////////////////////////////////////////////////
-  let WindowsFirewall_WindowsEvent=(){   
+  let WindowsFirewall_WindowsEvent=(disabled:bool=false){   
         WindowsEvent | where not(disabled)
         | project EventID, EventData, Computer, TimeGenerated, _ResourceId, _SubscriptionId, Type
         | where EventID between (5150 .. 5159)
